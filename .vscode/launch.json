@@ -1,0 +1,19 @@
+// {
+//     // Use IntelliSense to learn about possible attributes.
+//     // Hover to view descriptions of existing attributes.
+//     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+//     "version": "0.2.0",
+//     "configurations": [
+//         {
+//             "name": "ROS: Launch",
+//             "type": "ros",
+//             "request": "launch",
+//             "target": "/home/speike/v_riekf_ws/src/V-RIEKF/v_riekf/launch/v_riekf.launch",
+//         },
+//         {
+//             "name": "ROS: Attach", //调试配置的名称，此处为ROS: Attach
+//             "request": "attach",
+//             "type": "ros"
+//         }
+//     ]
+// }

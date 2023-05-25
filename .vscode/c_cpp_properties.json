@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "name": "ROS2",
+            "browse": {
+                "databaseFilename": "${default}",
+                "limitSymbolsToIncludedHeaders": true   //智能提示只搜索包含的头文件，速度快
+            },
+            "includePath": [
+                "/opt/ros/foxy/include/**",
+                "${workspaceFolder}/src/**",
+                "/usr/local/include/**"
+            ],
+            "intelliSenseMode": "${default}",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu17",
+            "cppStandard": "c++17",
+            "configurationProvider": "ms-vscode.cmake-tools"
+        }
+    ],
+    "version": 4
+}
