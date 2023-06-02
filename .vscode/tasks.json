@@ -36,17 +36,20 @@
                 "--symlink-install",
                 "--parallel-workers",
                 "2",
-                "--packages-up-to",
-                "ch3_rigid_body_trans"
+                // "--packages-up-to",
+                // "ch4_lie_theory"
             ],
+            "presentation": {
+                "clear": true
+            }, 
         },
         {
             "label": "ros2 run",
             "type": "shell",
             "command": "source ${workspaceFolder}/install/setup.bash && ros2 run `echo ${file} | grep -oP '(?<=src\/).*?(?=\/src)'` ${fileBasenameNoExtension}",
             "presentation": {
-                "clear": true
-            },
+                "clear": false
+            }, 
             "options": {
                 "cwd": "${workspaceFolder}"
             }
@@ -68,11 +71,11 @@
                 "focus": false,
                 "panel": "shared",
                 "showReuseMessage": true,
-                "clear": true
+                "clear": false
             }
         },
         {
-            "label": "echo path",
+            "label": "echo allpath",
             "type": "shell",
             "command": [
                 "echo {workspaceFolder}: ${workspaceFolder}&",

@@ -13,7 +13,7 @@ class TrajectoryPublisher : public rclcpp::Node
 public:
     TrajectoryPublisher() : Node("traj_pub_node")
     {
-        RCLCPP_INFO_STREAM(this->get_logger(), "轨迹发布节点1创建");
+        RCLCPP_INFO_STREAM(this->get_logger(), "轨迹发布节点创建");
         infile_traj.open(filepath);     // 打开路径文件
         if(!infile_traj.is_open())
             RCLCPP_ERROR_STREAM(this->get_logger(), "轨迹文件加载出错!!!,当前路径为:" << filesystem::current_path());
@@ -55,5 +55,5 @@ int main(int argc, char** argv)
     rclcpp::init(argc, argv);
     rclcpp::spin(make_shared<TrajectoryPublisher>());
     rclcpp::shutdown();
-    return 0;
+    return 0; 
 }
