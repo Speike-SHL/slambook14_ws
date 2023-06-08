@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(ch4_lie_theory)
+project(ch5_camera_model)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
@@ -19,32 +19,34 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
-find_package(nav_msgs REQUIRED)
-find_package(geometry_msgs REQUIRED)
-find_package(Eigen3 REQUIRED)
-find_package(Sophus REQUIRED)
-
-include_directories(${EIGEN3_INCLUDE_DIR})
-include_directories(${Sophus_INCLUDE_DIR})
+find_package(sensor_msgs REQUIRED)
+find_package(OpenCV REQUIRED)
 
 # 编译设置
-add_executable(4.4.1_useSophus src/4.4.1_useSophus.cpp)
-add_executable(4.4.2_trajectoryError_node src/4.4.2_trajectoryError_node.cpp)
-ament_target_dependencies(4.4.2_trajectoryError_node
-  rclcpp 
-  nav_msgs 
-  geometry_msgs
-  )
+add_executable(5.3.1_opencvBasic src/5.3.1_opencvBasic.cpp)
+target_link_libraries(5.3.1_opencvBasic ${OpenCV_LIBS})
+target_compile_options(5.3.1_opencvBasic PRIVATE -Wno-unused-variable)
+
+add_executable(5.3.2_undistortImage src/5.3.2_undistortImage.cpp)
+target_link_libraries(5.3.2_undistortImage ${OpenCV_LIBS})
+
+add_executable(5.4.1_stereoVision_node src/5.4.1_stereoVision_node.cpp)
+target_link_libraries(5.4.1_stereoVision_node ${OpenCV_LIBS})
+ament_target_dependencies(5.4.1_stereoVision_node
+  rclcpp
+  sensor_msgs
+)
 
 # install settings
 install(TARGETS
-  4.4.1_useSophus
-  4.4.2_trajectoryError_node
+  5.3.1_opencvBasic
+  5.3.2_undistortImage
+  5.4.1_stereoVision_node
   DESTINATION lib/${PROJECT_NAME}) 
 
 # install launch
 install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
-  
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
