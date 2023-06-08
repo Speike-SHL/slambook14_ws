@@ -8,8 +8,9 @@
             },
             "includePath": [
                 "/opt/ros/foxy/include/**",
-                "${workspaceFolder}/src/**",
-                "/usr/local/include/**"
+                "/usr/local/include/**",
+                "/usr/include/**",
+                "${workspaceFolder}/src/**"
             ],
             "intelliSenseMode": "${default}",
             "compilerPath": "/usr/bin/gcc",

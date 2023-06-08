@@ -34,10 +34,10 @@ class Pointcloud2Publisher : public rclcpp::Node
 public:
     Pointcloud2Publisher() : Node("pointcloud2_pub_node")
     {
-        /*====================================== ros2相关 ======================================*/
+        /*=================================== ros2相关 ===================================*/
         pointcloud2_publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("pointcloud2_pub", 100);
         timer_ = this->create_wall_timer(500ms, bind(&Pointcloud2Publisher::timer_callback, this));
-        /*====================================== 读取图像 ======================================*/
+        /*=================================== 读取图像 ===================================*/
         cv::Mat left_img = cv::imread(left_img_path, CV_8UC1);
         cv::Mat right_img = cv::imread(right_img_path, CV_8UC1);
         if(left_img.data == nullptr || right_img.data == nullptr)
@@ -47,7 +47,7 @@ public:
                                 << right_img_path << "出错, 当前路径为" 
                                 << filesystem::current_path() << endl);
         }
-        /*========== 使用opencv函数计算像素平面的视差,注意课本公式5.15中d为成像平面的视差 ==========*/
+        /*======= 使用opencv函数计算像素平面的视差,注意课本公式5.15中d为成像平面的视差 =======*/
         cv::Ptr<cv::StereoSGBM> sgbm = cv::StereoSGBM::create(
             0, 16 * 6, 9, 8 * 9 * 9, 32 * 9 * 9, 1, 63, 10, 100, 32); // 不用知道参数怎么来的
         cv::Mat disparity_sgbm, disparity;
@@ -55,14 +55,14 @@ public:
         disparity_sgbm.convertTo(disparity, CV_32F, 1.0 / 16.0f); // 要转为32位浮点数,最后的视差图
         // cv::imshow("disparity", disparity/96.0);    // 显示时候进行一下归一化便于观察
         // cv::waitKey(0);
-        /*============================ 准备sensor_msgs/PointCloud2 ============================*/
+        /*========================= 准备sensor_msgs/PointCloud2 =========================*/
         pointcloud2_msg.header.frame_id = "left_camera";
-        pointcloud2_msg.header.stamp = this->now();
-        // 也可将height设为1代表点云是无序的,此时width可不设置默认等于点云长度
+        // 也可将height设为1代表点云是无序的,此时width等于点云长度,给一个尽可能大的值
+        // 或者用下面的modifier.resize
         pointcloud2_msg.height = left_img.rows; 
         pointcloud2_msg.width = left_img.cols;
         pointcloud2_msg.is_bigendian = false; // 小端存储,高字节为0
-        pointcloud2_msg.is_dense = false;   // 点云中包含无效点
+        pointcloud2_msg.is_dense = true;   // 点云中不包含无效点
         sensor_msgs::PointCloud2Modifier modifier(pointcloud2_msg);
         modifier.setPointCloud2Fields(4,//n_fields,name,count,datatype
                                     "x", 1, sensor_msgs::msg::PointField::FLOAT32,    
@@ -74,7 +74,7 @@ public:
         sensor_msgs::PointCloud2Iterator<float> iter_y(pointcloud2_msg, "y");
         sensor_msgs::PointCloud2Iterator<float> iter_z(pointcloud2_msg, "z");
         sensor_msgs::PointCloud2Iterator<uint32_t> iter_rgb(pointcloud2_msg, "rgb");
-        /*=============================== 开始恢复深度, 生成点云 ===============================*/
+        /*============================ 开始恢复深度, 生成点云 ============================*/
         for (int v = 0; v < left_img.rows; v++)
             for (int u = 0; u < left_img.cols; u++, ++iter_x, ++iter_y, ++iter_z, ++iter_rgb)
             {
@@ -99,6 +99,7 @@ public:
 private:
     void timer_callback()
     {
+        pointcloud2_msg.header.stamp = this->now();
         pointcloud2_publisher_->publish(pointcloud2_msg);
     }
     rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pointcloud2_publisher_;

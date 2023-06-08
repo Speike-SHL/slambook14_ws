@@ -5,6 +5,7 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
+        - /PointCloud21
       Splitter Ratio: 0.5
     Tree Height: 2028
   - Class: rviz_common/Selection
@@ -45,7 +46,7 @@ Visualization Manager:
       Position Transformer: XYZ
       Selectable: true
       Size (Pixels): 3
-      Size (m): 0.009999999776482582
+      Size (m): 0.05000000074505806
       Style: Flat Squares
       Topic:
         Depth: 5
@@ -99,16 +100,16 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 30.726194381713867
+      Distance: 24.75301742553711
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 2.212092399597168
-        Y: -1.686207890510559
-        Z: 17.819019317626953
+        X: 0.028653237968683243
+        Y: -1.9285236597061157
+        Z: 17.819305419921875
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
@@ -117,7 +118,7 @@ Visualization Manager:
       Pitch: -1.5697963237762451
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.696765899658203
+      Yaw: 4.706766128540039
     Saved: ~
 Window Geometry:
   Displays:

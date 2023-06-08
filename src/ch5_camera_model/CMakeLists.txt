@@ -21,6 +21,11 @@ find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(OpenCV REQUIRED)
+find_package(Sophus REQUIRED)
+find_package(PCL REQUIRED)
+
+include_directories(${Sophus_INCLUDE_DIR})
+include_directories(${PCL_INCLUDE_DIRS})
 
 # 编译设置
 add_executable(5.3.1_opencvBasic src/5.3.1_opencvBasic.cpp)
@@ -31,8 +36,15 @@ add_executable(5.3.2_undistortImage src/5.3.2_undistortImage.cpp)
 target_link_libraries(5.3.2_undistortImage ${OpenCV_LIBS})
 
 add_executable(5.4.1_stereoVision_node src/5.4.1_stereoVision_node.cpp)
-target_link_libraries(5.4.1_stereoVision_node ${OpenCV_LIBS})
+target_link_libraries(5.4.1_stereoVision_node ${OpenCV_LIBS} )
 ament_target_dependencies(5.4.1_stereoVision_node
+  rclcpp
+  sensor_msgs
+)
+
+add_executable(5.4.2_rgbdJointMap_node src/5.4.2_rgbdJointMap_node.cpp)
+target_link_libraries(5.4.2_rgbdJointMap_node ${OpenCV_LIBS} ${PCL_LIBRARIES})
+ament_target_dependencies(5.4.2_rgbdJointMap_node
   rclcpp
   sensor_msgs
 )
@@ -42,6 +54,7 @@ install(TARGETS
   5.3.1_opencvBasic
   5.3.2_undistortImage
   5.4.1_stereoVision_node
+  5.4.2_rgbdJointMap_node
   DESTINATION lib/${PROJECT_NAME}) 
 
 # install launch

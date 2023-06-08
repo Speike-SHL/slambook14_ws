@@ -23,12 +23,12 @@ def generate_launch_description():
     rviz_config_file = os.path.join(
         get_package_share_directory('ch5_camera_model'),
         'launch', 
-        '5.4.1_show_pointcloud2.rviz'
+        '5.4.2_show_pointcloud2.rviz'
         )
     print(rviz_config_file)
     t1 = Node(
         package="ch5_camera_model",
-        executable="5.4.1_stereoVision_node",
+        executable="5.4.2_rgbdJointMap_node",
         name="pointcloud2_pub_node",
         output="screen"
         )
