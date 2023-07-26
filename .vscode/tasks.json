@@ -36,8 +36,12 @@
                 "--symlink-install",
                 "--parallel-workers",
                 "2",
-                // "--packages-up-to",
+                "--packages-up-to",
+                // "ch3_rigid_body_trans"
                 // "ch4_lie_theory"
+                // "ch5_camera_model"
+                "ch6_nonlinear_optimization"
+
             ],
             "presentation": {
                 "clear": true

@@ -7,6 +7,7 @@
                 "limitSymbolsToIncludedHeaders": true   //智能提示只搜索包含的头文件，速度快
             },
             "includePath": [
+                "/usr/local/include/ceres/**",
                 "/opt/ros/foxy/include/**",
                 "/usr/local/include/**",
                 "/usr/include/**",

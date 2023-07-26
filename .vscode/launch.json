@@ -1,19 +1,30 @@
-// {
-//     // Use IntelliSense to learn about possible attributes.
-//     // Hover to view descriptions of existing attributes.
-//     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-//     "version": "0.2.0",
-//     "configurations": [
-//         {
-//             "name": "ROS: Launch",
-//             "type": "ros",
-//             "request": "launch",
-//             "target": "/home/speike/v_riekf_ws/src/V-RIEKF/v_riekf/launch/v_riekf.launch",
-//         },
-//         {
-//             "name": "ROS: Attach", //调试配置的名称，此处为ROS: Attach
-//             "request": "attach",
-//             "type": "ros"
-//         }
-//     ]
-// }
+{
+    "version": "2.0.0",
+    "configurations": [
+        {
+            "name": "ch6_nonlinear_optimization",
+            "type": "cppdbg",
+            "request": "launch",
+            // 要调试的可执行文件路径，内置变量不够用时可以用/..返回上级
+            "program": "${workspaceFolder}/build/ch6_nonlinear_optimization/${fileBasenameNoExtension}",
+            "args": [],
+            "stopAtEntry": false,
+            // cwd指定了可执行文件运行时的路径
+            "cwd": "${workspaceFolder}/",   
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "为 gdb 启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            // task.json中的build
+            "preLaunchTask": "colcon build",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "miDebuggerArgs": "-q -ex quit; wait() { fg >/dev/null; }; /usr/bin/gdb -q --interpreter=mi",
+        }
+    ]
+}
