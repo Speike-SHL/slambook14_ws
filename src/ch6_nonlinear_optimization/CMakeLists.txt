@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.16)
 project(ch6_nonlinear_optimization)
 
 # Default to C99
@@ -15,22 +15,23 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable")
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Debug)   # 若要对比算法速度，最好使用Release模式, 否则会很慢
 
+# 添加module路径
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/module)
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(std_msgs REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(Ceres REQUIRED)
-#find_package(g2o REQUIRED)
+find_package(G2O REQUIRED)
+find_package(glog 0.6.0 REQUIRED)
 
 include_directories(${EIGEN3_INCLUDE_DIR})
 include_directories(${CERES_INCLUDE_DIRS})
-#include_directories(${G2O_INCLUDE_DIRS})
+include_directories(${G2O_INCLUDE_DIRS})
 include_directories(include)
 
 # 编译设置
@@ -38,14 +39,14 @@ add_executable(6.3.1_byhand src/6.3.1_byhand.cpp)
 target_link_libraries(6.3.1_byhand ${OpenCV_LIBS})
 add_executable(6.3.2_ceresCurveFitting src/6.3.2_ceresCurveFitting.cpp)
 target_link_libraries(6.3.2_ceresCurveFitting ${OpenCV_LIBS} ${CERES_LIBRARIES})
-#add_executable(6.3.3_g2oCurveFitting src/6.3.3_g2oCurveFitting.cpp)
-#target_link_libraries(6.3.3_g2oCurveFitting ${OpenCV_LIBS} ${G2O_LIBRARIES})
+add_executable(6.3.3_g2oCurveFitting src/6.3.3_g2oCurveFitting.cpp)
+target_link_libraries(6.3.3_g2oCurveFitting ${OpenCV_LIBS} ${G2O_CORE_LIBRARY} ${G2O_STUFF_LIBRARY} glog::glog)
 
 # install settings
 install(TARGETS
   6.3.1_byhand
   6.3.2_ceresCurveFitting
-#  6.3.3_g2oCurveFitting
+  6.3.3_g2oCurveFitting
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)

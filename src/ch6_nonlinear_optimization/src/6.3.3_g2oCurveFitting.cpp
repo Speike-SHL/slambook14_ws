@@ -10,6 +10,10 @@
  * @date       2023/07/26 14:59:41
  * @brief      G2O曲线拟合实验
 **/
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+#pragma GCC diagnostic ignored "-Wreturn-type"
+
 #include <functional>
 #include <opencv2/core/core.hpp>
 #include "tic_toc.h"
@@ -49,7 +53,7 @@ public:
     myVertex(){}
     bool read(istream &in) override{}
     bool write(ostream &out) const override{}
-    //XXX 重置
+    // XXX 重置
     void setToOriginImpl() override
     {
         _estimate = Eigen::Vector3d::Zero();
@@ -117,8 +121,8 @@ void useG2O(pair<vector<double>,vector<double>> data, Eigen::Vector3d init_param
     // 执行优化
     TicToc time;
     optimizer.initializeOptimization();
-    optimizer.optimize(20); // 设置迭代次数
-    cout << "--> G2O求解耗时: " << time.toc() << "ms. 估计结果为 :" << v->estimate() << endl;
+    optimizer.optimize(10); // 设置迭代次数
+    cout << "--> G2O求解耗时: " << time.toc() << "ms. 估计结果为 :" << v->estimate().transpose() << endl;
 }
 
 int main()
@@ -133,3 +137,4 @@ int main()
     useG2O(data, Eigen::Vector3d(2.0, -1.0, 5.0), sigma);
     return EXIT_SUCCESS;
 }
+#pragma GCC diagnostic pop

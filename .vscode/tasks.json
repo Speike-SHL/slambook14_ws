@@ -50,7 +50,7 @@
         {
             "label": "ros2 run",
             "type": "shell",
-            "command": "source ${workspaceFolder}/install/setup.bash && ros2 run `echo ${file} | grep -oP '(?<=src\/).*?(?=\/src)'` ${fileBasenameNoExtension}",
+            "command": "source ${workspaceFolder}/install/setup.zsh && ros2 run `echo ${file} | grep -oP '(?<=src\/).*?(?=\/src)'` ${fileBasenameNoExtension}",
             "presentation": {
                 "clear": false
             }, 
