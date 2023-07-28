@@ -19,10 +19,12 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(pcl_conversions REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(Sophus REQUIRED)
 find_package(PCL REQUIRED)
+find_package(FMT REQUIRED)
 
 include_directories(${Sophus_INCLUDE_DIR})
 include_directories(${PCL_INCLUDE_DIRS})
@@ -43,10 +45,11 @@ ament_target_dependencies(5.4.1_stereoVision_node
 )
 
 add_executable(5.4.2_rgbdJointMap_node src/5.4.2_rgbdJointMap_node.cpp)
-target_link_libraries(5.4.2_rgbdJointMap_node ${OpenCV_LIBS} ${PCL_LIBRARIES})
+target_link_libraries(5.4.2_rgbdJointMap_node ${OpenCV_LIBS} ${PCL_LIBRARIES} fmt::fmt)
 ament_target_dependencies(5.4.2_rgbdJointMap_node
   rclcpp
   sensor_msgs
+  pcl_conversions
 )
 
 # install settings
