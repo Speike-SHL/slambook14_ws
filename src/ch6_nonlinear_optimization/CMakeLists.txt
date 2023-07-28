@@ -27,7 +27,7 @@ find_package(OpenCV REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(Ceres REQUIRED)
 find_package(G2O REQUIRED)
-find_package(glog 0.6.0 REQUIRED)
+find_package(glog REQUIRED)
 
 include_directories(${EIGEN3_INCLUDE_DIR})
 include_directories(${CERES_INCLUDE_DIRS})
