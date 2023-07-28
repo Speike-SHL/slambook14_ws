@@ -23,13 +23,16 @@ find_package(nav_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(Sophus REQUIRED)
+find_package(FMT REQUIRED)
 
 include_directories(${EIGEN3_INCLUDE_DIR})
 include_directories(${Sophus_INCLUDE_DIR})
 
 # 编译设置
 add_executable(4.4.1_useSophus src/4.4.1_useSophus.cpp)
+target_link_libraries(4.4.1_useSophus fmt::fmt)
 add_executable(4.4.2_trajectoryError_node src/4.4.2_trajectoryError_node.cpp)
+target_link_libraries(4.4.2_trajectoryError_node fmt::fmt)
 ament_target_dependencies(4.4.2_trajectoryError_node
   rclcpp 
   nav_msgs 
