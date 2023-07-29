@@ -2,11 +2,11 @@
     "version": "2.0.0",
     "configurations": [
         {
-            "name": "ch6_nonlinear_optimization",
+            "name": "ch5_camera_model",
             "type": "cppdbg",
             "request": "launch",
             // 要调试的可执行文件路径，内置变量不够用时可以用/..返回上级
-            "program": "${workspaceFolder}/build/ch6_nonlinear_optimization/${fileBasenameNoExtension}",
+            "program": "${workspaceFolder}/build/ch5_camera_model/${fileBasenameNoExtension}",
             "args": [],
             "stopAtEntry": false,
             // cwd指定了可执行文件运行时的路径
