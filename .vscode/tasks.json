@@ -39,8 +39,9 @@
                 "--packages-up-to",
                 // "ch3_rigid_body_trans"
                 // "ch4_lie_theory"
-                "ch5_camera_model"
+                // "ch5_camera_model"
                 // "ch6_nonlinear_optimization"
+                "ch7_visual_odometry_1"
 
             ],
             "presentation": {

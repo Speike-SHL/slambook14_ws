@@ -47,7 +47,7 @@ int main(void)
 {
     // 读取图像
     cv::Mat image;
-    image = cv::imread("./src/ch5_camera_model/data/5.3.1_ubuntu.png");
+    image = cv::imread(pic_path);
 
     // 判断文件是否读取成功
     if(image.data == nullptr)
