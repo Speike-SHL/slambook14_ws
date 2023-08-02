@@ -16,6 +16,7 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_CXX_FLAGS "-O3 ${SSE_FLAGS} -msse4")
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
