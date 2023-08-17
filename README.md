@@ -34,3 +34,5 @@ ros2语法：
 5. ch7_visual_odometry_1(第七讲：视觉里程计1)
     - `ros2 run ch7_visual_odometry_1 7.2.1_orb_opencv` 使用Opencv实现orb特征点提取匹配
     - `ros2 run ch7_visual_odometry_1 7.2.2_orb_byhand` 手写orb特征点的提取与匹配
+    - `ros2 run ch7_visual_odometry_1 7.4_polar_constriant_2d2d` 已知匹配点用对极几何求相邻两帧间的运动R、t，求基础矩阵F、本质矩阵E和单应矩阵H
+    - `ros2 run ch7_visual_odometry_1 7.6.1_triangulation` 三角化，使用opencv提供的函数进行三角化

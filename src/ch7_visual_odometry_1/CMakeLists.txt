@@ -32,12 +32,15 @@ add_executable(7.2.2_orb_byhand src/7.2.2_orb_byhand.cpp)
 target_link_libraries(7.2.2_orb_byhand ${OpenCV_LIBS})
 add_executable(7.4_polar_constraint_2d2d src/7.4_polar_constraint_2d2d.cpp)
 target_link_libraries(7.4_polar_constraint_2d2d ${OpenCV_LIBS})
+add_executable(7.6.1_triangulation src/7.6.1_triangulation.cpp)
+target_link_libraries(7.6.1_triangulation ${OpenCV_LIBS})
 
 # install settings
 install(TARGETS
   7.2.1_orb_opencv
   7.2.2_orb_byhand
   7.4_polar_constraint_2d2d
+  7.6.1_triangulation
   DESTINATION lib/${PROJECT_NAME}
 )
 
