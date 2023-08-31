@@ -1,18 +1,23 @@
 {
     "python.autoComplete.extraPaths": [
-        "/opt/ros/noetic/lib/python3/dist-packages"
+        "/opt/ros/foxy/lib/python3/dist-packages"
     ],
     "python.analysis.extraPaths": [
-        "/opt/ros/noetic/lib/python3/dist-packages"
+        "/opt/ros/foxy/lib/python3/dist-packages"
     ],
-    "files.exclude": {  //左侧文件树排除文件
+    "files.exclude": { //左侧文件树排除文件
         ".vscode/*": false,
         "build*/": false,
         "install*/": false,
-        "logs*/": false,
+        "log*/": true,
     },
+    "c-cpp-flylint.clang.includePaths": [
+        "/usr/local/include",
+        "${workspaceFolder}/src/ch7_visual_odometry_1/include",
+    ],
     "files.associations": {
         "*.m": "matlab",
+        "*.json": "jsonc",
         "iosfwd": "cpp",
         "*.tcc": "cpp",
         "string": "cpp",
@@ -88,7 +93,9 @@
         "*.ipp": "cpp",
         "future": "cpp",
         "valarray": "cpp",
-        "geometry": "cpp"
+        "geometry": "cpp",
+        "filesystem": "cpp",
+        "core": "cpp"
     },
     "taskExplorer.exclude": [
         "**/Assets/**",
@@ -107,5 +114,6 @@
         "**/target/**",
         "**/vendor/**",
         "**/work/**"
-    ]
+    ],
+    "C_Cpp.codeAnalysis.clangTidy.enabled": true,
 }

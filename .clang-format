@@ -1,0 +1,27 @@
+---
+BasedOnStyle: Google
+---
+Language: Cpp
+# 缩进宽度
+IndentWidth: 4
+# 每行宽度
+ColumnLimit: 85
+# 控制大括号的位置，BreakBeforeBraces设置为Custom时，BraceWrapping才会生效
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterFunction: true
+  AfterClass: true
+  AfterNamespace: true
+  AfterEnum: true
+  AfterStruct: true
+  AfterUnion: true
+  AfterExternBlock: true
+  # 控制if/else/while/switch
+  AfterControlStatement: Always
+  BeforeLambdaBody: true
+# class/struct/enum/union/namespace等的访问修饰符如public额外缩进多少
+AccessModifierOffset: -4
+# class下的访问修饰符是否独立缩进2个空格
+IndentAccessModifiers: false
+# if/else/for等下面只有一行的时候是否加大括号
+InsertBraces: false

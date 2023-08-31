@@ -26,7 +26,7 @@
     "options": {
         "cwd": "${workspaceFolder}"
     },
-    "tasks" : [
+    "tasks": [
         {
             "label": "colcon build",
             "type": "shell",
@@ -34,6 +34,8 @@
             "args": [
                 "build",
                 "--symlink-install",
+                "--cmake-args",
+                "-Wno-dev",
                 "--parallel-workers",
                 "2",
                 "--packages-up-to",
@@ -42,11 +44,10 @@
                 // "ch5_camera_model"
                 // "ch6_nonlinear_optimization"
                 "ch7_visual_odometry_1"
-
             ],
             "presentation": {
                 "clear": true
-            }, 
+            },
         },
         {
             "label": "ros2 run",
@@ -54,12 +55,12 @@
             "command": "source ${workspaceFolder}/install/setup.zsh && ros2 run `echo ${file} | grep -oP '(?<=src\/).*?(?=\/src)'` ${fileBasenameNoExtension}",
             "presentation": {
                 "clear": false
-            }, 
+            },
             "options": {
                 "cwd": "${workspaceFolder}"
             }
         },
-        {       
+        {
             "label": "build and run",
             "dependsOrder": "sequence",
             "dependsOn": [
@@ -95,7 +96,7 @@
                 "echo {fileExtname}: ${fileExtname}&",
                 "echo {cwd}: ${cwd}&"
             ],
-            "group":{
+            "group": {
                 "kind": "test",
                 "isDefault": true
             }

@@ -9,11 +9,11 @@
  * @author     Speike
  * @date       2023/08/01 17:17:42
  * @brief      使用Opencv实现orb特征点提取匹配
-**/
+ **/
 
-#include <iostream>
-#include <filesystem>
 #include "tic_toc.h"
+#include <experimental/filesystem>
+#include <iostream>
 #include <opencv2/core/core.hpp>
 #include <opencv2/features2d/features2d.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -24,9 +24,10 @@ int main()
     //-- 读取图像
     cv::Mat img_1 = cv::imread("./src/ch7_visual_odometry_1/data/1.png", CV_LOAD_IMAGE_COLOR);
     cv::Mat img_2 = cv::imread("./src/ch7_visual_odometry_1/data/2.png", CV_LOAD_IMAGE_COLOR);
-    if(img_1.data == nullptr || img_2.data == nullptr)
-    {
-        cerr << "文件" << "./src/ch7_visual_odometry_1/data/(1或2).png" << "读取失败，当前路径为" << filesystem::current_path() << endl;
+    if (img_1.data == nullptr || img_2.data == nullptr) {
+        cerr << "文件"
+             << "./src/ch7_visual_odometry_1/data/(1或2).png"
+             << "读取失败，当前路径为" << experimental::filesystem::current_path() << endl;
         return EXIT_FAILURE;
     }
 
@@ -55,7 +56,7 @@ int main()
     cv::hconcat(outimg1, outimg2, outimg);
     cv::namedWindow("ORB特征", cv::WINDOW_KEEPRATIO);
     cv::imshow("ORB特征", outimg);
-    
+
     //-- 第三步：对Rotated BRIEF描述子进行匹配
     TicToc t_match;
     matcher->match(descriptors_1, descriptors_2, matches);
@@ -63,18 +64,16 @@ int main()
 
     //-- 第四步：匹配点对的筛选
     auto min_max = minmax_element(matches.begin(), matches.end(),
-                                    [](const cv::DMatch &m1, const cv::DMatch &m2)
-                                    { return m1.distance < m2.distance; });
+        [](const cv::DMatch& m1, const cv::DMatch& m2) { return m1.distance < m2.distance; });
     double min_dist = min_max.first->distance;
     double max_dist = min_max.second->distance;
     printf("-- Max dist : %f \n", max_dist);
     printf("-- Min dist : %f \n", min_dist);
-    //当描述子之间的距离大于两倍的最小距离时,即认为匹配有误.但有时候最小距离会非常小,设置一个经验值30作为下限.
+    // 当描述子之间的距离大于两倍的最小距离时,即认为匹配有误.但有时候最小距离会非常小,设置一个经验值30作为下限.
     vector<cv::DMatch> good_matches;
-    for (int i = 0; i < descriptors_1.rows; i++)
-    {
-        if(matches[i].distance <= std::max(2 * min_dist, 30.0))
-        good_matches.push_back(matches[i]);
+    for (int i = 0; i < descriptors_1.rows; i++) {
+        if (matches[i].distance <= std::max(2 * min_dist, 30.0))
+            good_matches.push_back(matches[i]);
     }
 
     //-- 第五步：绘制匹配结果

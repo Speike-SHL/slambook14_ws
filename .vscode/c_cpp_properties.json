@@ -4,14 +4,16 @@
             "name": "ROS2",
             "browse": {
                 "databaseFilename": "${default}",
-                "limitSymbolsToIncludedHeaders": true   //智能提示只搜索包含的头文件，速度快
+                "limitSymbolsToIncludedHeaders": true, //智能提示只搜索包含的头文件，速度快
+                "path": [
+                    "${workspaceFolder}"
+                ]
             },
             "includePath": [
-                "/usr/local/include/ceres/**",
-                "/opt/ros/foxy/include/**",
+                "${workspaceFolder}/src/**",
                 "/usr/local/include/**",
-                "/usr/include/**",
-                "${workspaceFolder}/src/**"
+                "/opt/ros/foxy/include/**"
+                // "/usr/include/**",
             ],
             "intelliSenseMode": "${default}",
             "compilerPath": "/usr/bin/gcc",
