@@ -21,6 +21,7 @@
 #include <pcl_conversions/pcl_conversions.h>
 #include <pcl/filters/voxel_grid.h>
 #include <pcl/visualization/pcl_visualizer.h>
+#include <pcl/visualization/pcl_visualizer.h>
 
 using namespace std;
 using namespace std::chrono_literals;
@@ -34,7 +35,13 @@ string depth_img_path = "./src/ch5_camera_model/data/5.4.2_rgbd/depth/";
 string pose_path = "./src/ch5_camera_model/data/5.4.2_rgbd/pose.txt";
 
 class Pointcloud2Publisher : public rclcpp::Node {
+class Pointcloud2Publisher : public rclcpp::Node {
 public:
+    Pointcloud2Publisher(const vector<cv::Mat>& colorImgs_,
+                         const vector<cv::Mat>& depthImgs_,
+                         const vector<Sophus::SE3d,Eigen::aligned_allocator<Sophus::SE3d>>& poses_)
+        : Node("pointcloud2_pub_node") {
+        
     Pointcloud2Publisher(const vector<cv::Mat>& colorImgs_,
                          const vector<cv::Mat>& depthImgs_,
                          const vector<Sophus::SE3d,Eigen::aligned_allocator<Sophus::SE3d>>& poses_)
@@ -44,12 +51,16 @@ public:
         pointcloud2_publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("pointcloud2_pub", 100);
         timer_ = this->create_wall_timer(50ms, std::bind(&Pointcloud2Publisher::timer_callback, this));
         
+        timer_ = this->create_wall_timer(50ms, std::bind(&Pointcloud2Publisher::timer_callback, this));
+        
         /*=================== 准备pcl::PointCloud<pcl::PointXYZRGB> ================*/
         cloud_.height = 1;
         cloud_.width = 2000000;
         cloud_.is_dense = true;
         
+        
         /*================== 读取图像颜色和深度,左乘T_wc全部转化到世界系 ===============*/
+        for (int i = 0; i < 5; i++) {
         for (int i = 0; i < 5; i++) {
             RCLCPP_INFO(this->get_logger(), "转换图像中: %d.", i + 1);
             const cv::Mat& colorImg = colorImgs_[i];
@@ -58,7 +69,12 @@ public:
             
             for (int v = 0; v < colorImg.rows; v++) {
                 for (int u = 0; u < colorImg.cols; u++) {
+            
+            for (int v = 0; v < colorImg.rows; v++) {
+                for (int u = 0; u < colorImg.cols; u++) {
                     uint16_t depth = depthImg.ptr<uint16_t>(v)[u];
+                    if (depth == 0) continue; //表示没有测量到
+                    
                     if (depth == 0) continue; //表示没有测量到
                     
                     // 归一化坐标
@@ -82,7 +98,11 @@ public:
             }
         }
         
+            }
+        }
+        
         cout << "五张图像总点数为: " << cloud_.size() << endl;
+        
         
         /*============================== 进行体素滤波 ============================*/
         pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_ptr(new pcl::PointCloud<pcl::PointXYZRGB>(cloud_));
@@ -92,6 +112,7 @@ public:
         sor.filter(*cloud_ptr);
         cloud_ = *cloud_ptr;
         cout << "进行体素滤波后的点数为:" << cloud_.size() << endl;
+
 
         /*========================== 使用pcl进行可视化 ============================*/
         viewer->setBackgroundColor (0, 0, 0);
@@ -107,9 +128,16 @@ public:
         pointcloud2_msg.is_bigendian = false;
 
         cout << "构造函数结束" << endl; 
+
+        cout << "构造函数结束" << endl; 
     }
     
+    
 private:
+    void timer_callback() {
+        if(!viewer->wasStopped())
+            viewer->spinOnce (100);
+        else
     void timer_callback() {
         if(!viewer->wasStopped())
             viewer->spinOnce (100);
@@ -119,16 +147,21 @@ private:
             rclcpp::shutdown();
         }
         /*========================== 发布点云话题 ===============================*/
+        /*========================== 发布点云话题 ===============================*/
         pointcloud2_msg.header.stamp = this->now();
         pointcloud2_publisher_->publish(pointcloud2_msg);
     }
+    
     
     rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pointcloud2_publisher_;
     rclcpp::TimerBase::SharedPtr timer_;
     sensor_msgs::msg::PointCloud2 pointcloud2_msg;
     pcl::PointCloud<pcl::PointXYZRGB> cloud_;
     pcl::visualization::PCLVisualizer::Ptr viewer = pcl::make_shared<pcl::visualization::PCLVisualizer>( "Point Cloud Viewer" );
+    pcl::visualization::PCLVisualizer::Ptr viewer = pcl::make_shared<pcl::visualization::PCLVisualizer>( "Point Cloud Viewer" );
 };
+
+
 
 
 
