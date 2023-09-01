@@ -48,6 +48,8 @@ add_executable(7.6.1_triangulation src/7.6.1_triangulation.cpp)
 target_link_libraries(7.6.1_triangulation ${OpenCV_LIBS} -lstdc++fs)
 add_executable(7.8_PnP_3d2d src/7.8_PnP_3d2d.cpp)
 target_link_libraries(7.8_PnP_3d2d ${OpenCV_LIBS} ${CERES_LIBRARIES} ${G2O_CORE_LIBRARY} ${G2O_STUFF_LIBRARY} -lstdc++fs)
+add_executable(7.10_ICP_3d3d src/7.10_ICP_3d3d.cpp)
+target_link_libraries(7.10_ICP_3d3d ${OpenCV_LIBS} ${CERES_LIBRARIES} ${G2O_CORE_LIBRARY} ${G2O_STUFF_LIBRARY} -lstdc++fs)
 
 # install settings
 install(TARGETS
@@ -56,6 +58,7 @@ install(TARGETS
   7.4_polar_constraint_2d2d
   7.6.1_triangulation
   7.8_PnP_3d2d
+  7.10_ICP_3d3d
   DESTINATION lib/${PROJECT_NAME}
 )
 

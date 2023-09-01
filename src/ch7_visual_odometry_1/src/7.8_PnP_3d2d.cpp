@@ -19,7 +19,6 @@
 #include <g2o/core/base_vertex.h>
 #include <g2o/core/block_solver.h>
 #include <g2o/core/optimization_algorithm_gauss_newton.h>
-#include <g2o/core/optimization_algorithm_levenberg.h>
 #include <g2o/solvers/dense/linear_solver_dense.h>
 
 #include <Eigen/Dense>
@@ -159,8 +158,8 @@ void BAPnP_G2O(vector<cv::Point3f> &pts_3d, vector<cv::Point2f> &pts_2d)
     // 相机内参
     Eigen::Matrix3d K;
     K << fx, 0, cx, 0, fy, cy, 0, 0, 1;
-    // 优化变量为位姿T的李代数为6维, 误差值齐次坐标的像素坐标为3维
-    using BlockSolverType = g2o::BlockSolverPL<6, 3>;
+    // 优化变量为位姿T的李代数为6维, 误差值像素坐标为2维
+    using BlockSolverType = g2o::BlockSolverPL<6, 2>;
     // 线性求解器类型
     using LinearSolverType = g2o::LinearSolverDense<BlockSolverType::PoseMatrixType>;
     // 创建总求解器--GN法
