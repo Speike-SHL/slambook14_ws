@@ -43,7 +43,8 @@
                 // "ch4_lie_theory"
                 // "ch5_camera_model"
                 // "ch6_nonlinear_optimization"
-                "ch7_visual_odometry_1"
+                // "ch7_visual_odometry_1"
+                "ch8_visual_odometry_2"
             ],
             "presentation": {
                 "clear": true

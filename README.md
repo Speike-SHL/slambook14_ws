@@ -38,3 +38,5 @@ ros2语法：
     - `ros2 run ch7_visual_odometry_1 7.6.1_triangulation` 三角化，使用opencv提供的函数进行三角化
     - `ros2 run ch7_visual_odometry_1 7.8_PnP_3d2d` 分别使用OpenCV的EPnP, 手写高斯牛顿法解BAPnP, 使用G2O求解BAPnP 以及使用Ceres-solver解BAPnP
     - `ros2 run ch7_visual_odometry_1 7.10_ICP_3d3d` 分别使用SVD法、G2O上的非线性优化、CERES上的非线性优化等方法求解ICP问题
+6. ch8_visual_odometry_2(第八讲：视觉里程计2)
+    - `ros2 run ch8_visual_odometry_2 8.3_LK_optical_flow` OpenCV实现光流法、手写高斯牛顿实现正向光流, 光流金字塔实现反向光流, 同时调用tbb中的parallel_for_并行的计算每个关键点的光流估计
