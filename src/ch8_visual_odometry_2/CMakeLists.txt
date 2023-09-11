@@ -24,17 +24,22 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(Eigen3 REQUIRED)
+find_package(Sophus REQUIRED)
 
 include_directories(include)
 include_directories(${EIGEN3_INCLUDE_DIR})
+include_directories(${Sophus_INCLUDE_DIRS})
 
 # 编译设置
 add_executable(8.3_LK_optical_flow src/8.3_LK_optical_flow.cpp)
 target_link_libraries(8.3_LK_optical_flow ${OpenCV_LIBS} -lstdc++fs)
+add_executable(8.5_direct_method src/8.5_direct_method.cpp)
+target_link_libraries(8.5_direct_method ${OpenCV_LIBS} -lstdc++fs)
 
 # install settings
 install(TARGETS
   8.3_LK_optical_flow
+  8.5_direct_method
   DESTINATION lib/${PROJECT_NAME}
 )
 

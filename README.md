@@ -40,3 +40,4 @@ ros2语法：
     - `ros2 run ch7_visual_odometry_1 7.10_ICP_3d3d` 分别使用SVD法、G2O上的非线性优化、CERES上的非线性优化等方法求解ICP问题
 6. ch8_visual_odometry_2(第八讲：视觉里程计2)
     - `ros2 run ch8_visual_odometry_2 8.3_LK_optical_flow` OpenCV实现光流法、手写高斯牛顿实现正向光流, 光流金字塔实现反向光流, 同时调用tbb中的parallel_for_并行的计算每个关键点的光流估计
+    - `ros2 run ch8_visual_odometry_2 8.5_direct_method` OpenCV没有直接支持直接法, 使用单层和多层直接法。由于点过多, 误差过大，优化时没法累加矩阵GN，因此使用SUM(H)deltax = SUM(b)。但是这一节直接法的效果感觉并不好,从图上就能看出来。

@@ -157,6 +157,7 @@ void OpticalFlowTracker::calculateOpticalFlow(const cv::Range &range)
                     H = Jf.transpose() * Jf;
                 }
                 f = calResidual(kp, dx, dy);
+                cost = f.squaredNorm();
                 g = -Jf.transpose() * f;
             }
             if (inverse == false)
@@ -165,6 +166,7 @@ void OpticalFlowTracker::calculateOpticalFlow(const cv::Range &range)
                 H = Jf.transpose() * Jf;
                 f = calResidual(kp, dx, dy);
                 g = -Jf.transpose() * f;
+                cost = f.squaredNorm();
             }
 
             // compute update
