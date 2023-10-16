@@ -41,3 +41,6 @@ ros2语法：
 6. ch8_visual_odometry_2(第八讲：视觉里程计2)
     - `ros2 run ch8_visual_odometry_2 8.3_LK_optical_flow` OpenCV实现光流法、手写高斯牛顿实现正向光流, 光流金字塔实现反向光流, 同时调用tbb中的parallel_for_并行的计算每个关键点的光流估计
     - `ros2 run ch8_visual_odometry_2 8.5_direct_method` OpenCV没有直接支持直接法, 使用单层和多层直接法。由于点过多, 误差过大，优化时没法累加矩阵GN，因此使用SUM(H)deltax = SUM(b)。但是这一节直接法的效果感觉并不好,从图上就能看出来。
+7. ch9_back_end_1(第九讲：后端1)
+    - `ros2 run ch9_back_end_1 9.3_ceres_BA` 大型BA与图优化 , 已知 相机外参R_cw,t_cw(或相机在世界系下的位姿R_wc t_wc) 、三维点位置、对应相机的像素坐标 , **同时优化**世界系下的相机位姿、三维点位置、与相机内参f、k1、k2
+    - `ros2 run ch9_back_end_1 9.4_g2o_BA` 大型BA与图优化 , 已知 相机外参R_cw,t_cw(或相机在世界系下的位姿R_wc t_wc) 、三维点位置、对应相机的像素坐标 , **同时优化**世界系下的相机位姿、三维点位置、与相机内参f、k1、k2。与ceres不同的是, 这里需要手动设置边缘化, 而且需要把优化结果放回对应内存。这个文件实现的g2o没有给定雅可比矩阵。比ceres运行快。

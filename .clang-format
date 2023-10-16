@@ -5,7 +5,7 @@ Language: Cpp
 # 缩进宽度
 IndentWidth: 4
 # 每行宽度
-ColumnLimit: 85
+ColumnLimit: 90
 # 控制大括号的位置，BreakBeforeBraces设置为Custom时，BraceWrapping才会生效
 BreakBeforeBraces: Custom
 BraceWrapping:

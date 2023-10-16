@@ -2,4 +2,5 @@ build/
 devel/
 install/
 log/
+.VSCodeCounter
 slambook14_ws.code-workspace

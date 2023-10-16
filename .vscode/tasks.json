@@ -44,7 +44,8 @@
                 // "ch5_camera_model"
                 // "ch6_nonlinear_optimization"
                 // "ch7_visual_odometry_1"
-                "ch8_visual_odometry_2"
+                // "ch8_visual_odometry_2"
+                "ch9_back_end_1"
             ],
             "presentation": {
                 "clear": true
