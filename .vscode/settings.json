@@ -11,10 +11,6 @@
         "install*/": false,
         "log*/": true,
     },
-    "c-cpp-flylint.clang.includePaths": [
-        "/usr/local/include",
-        "${workspaceFolder}/src/ch7_visual_odometry_1/include",
-    ],
     "files.associations": {
         "*.m": "matlab",
         "*.json": "jsonc",

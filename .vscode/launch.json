@@ -2,11 +2,11 @@
     "version": "2.0.0",
     "configurations": [
         {
-            "name": "ch9_back_end_1",
+            "name": "ch10_back_end_2",
             "type": "cppdbg",
             "request": "launch",
             // 要调试的可执行文件路径，内置变量不够用时可以用/..返回上级
-            "program": "${workspaceFolder}/build/ch9_back_end_1/${fileBasenameNoExtension}",
+            "program": "${workspaceFolder}/build/ch10_back_end_2/${fileBasenameNoExtension}",
             "args": [],
             "stopAtEntry": false,
             // cwd指定了可执行文件运行时的路径

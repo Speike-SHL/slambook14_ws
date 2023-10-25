@@ -43,4 +43,8 @@ ros2语法：
     - `ros2 run ch8_visual_odometry_2 8.5_direct_method` OpenCV没有直接支持直接法, 使用单层和多层直接法。由于点过多, 误差过大，优化时没法累加矩阵GN，因此使用SUM(H)deltax = SUM(b)。但是这一节直接法的效果感觉并不好,从图上就能看出来。
 7. ch9_back_end_1(第九讲：后端1)
     - `ros2 run ch9_back_end_1 9.3_ceres_BA` 大型BA与图优化 , 已知 相机外参R_cw,t_cw(或相机在世界系下的位姿R_wc t_wc) 、三维点位置、对应相机的像素坐标 , **同时优化**世界系下的相机位姿、三维点位置、与相机内参f、k1、k2
-    - `ros2 run ch9_back_end_1 9.4_g2o_BA` 大型BA与图优化 , 已知 相机外参R_cw,t_cw(或相机在世界系下的位姿R_wc t_wc) 、三维点位置、对应相机的像素坐标 , **同时优化**世界系下的相机位姿、三维点位置、与相机内参f、k1、k2。与ceres不同的是, 这里需要手动设置边缘化, 而且需要把优化结果放回对应内存。这个文件实现的g2o没有给定雅可比矩阵。比ceres运行快。
+    - `ros2 run ch9_back_end_1 9.4_g2o_BA` 大型BA与图优化 , 已知 相机外参R_cw,t_cw(或相机在世界系下的位姿R_wc t_wc) 、三维点位置、对应相机的像素坐标 , **同时优化**世界系下的相机位姿、三维点位置、与相机内参f、k1、k2。与ceres不同的是, 这里需要手动设置边缘化, 而且需要把优化结果放回对应内存。这个文件实现的g2o没有给定雅可比矩阵。比ceres运行快。**首次使用了g2o的自动求导**！
+8. ch10_back_end_2(第十讲：后端2)
+    - `ros2 run ch10_back_end_2 10.3.1_pose_graph_g2o_SE3` g2o进行位姿图优化，顶点和边类都使用g2o预置，所以不需要自定义顶点和边。最后使用`optimizer.save()`保存了图，可以用g2o_viewer打开，但是该函数好像只有g2o预先定义的顶点和边做优化时才能使用save，自定义的不能用。同时，预先定义的顶点和边使用了`read`和`write`函数，但是不管是跳转还是调试都找不到代码实现。
+    - `ros2 run ch10_back_end_2 10.3.2_pose_graph_g2o_lie_algebra` 同样是g2o进行位姿图优化，但区别于上面程序，这里自定义了顶点和边，并且**首次实现了顶点类和边类的`read`和`write`函数**。
+    > 后端可以用**SE-Sync**进行更快速的优化，比g2o快一个数量级，见论文《A Comparison of Graph Optimization Approaches for Pose Estimation in SLAM》

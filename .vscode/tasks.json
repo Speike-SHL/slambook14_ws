@@ -45,7 +45,8 @@
                 // "ch6_nonlinear_optimization"
                 // "ch7_visual_odometry_1"
                 // "ch8_visual_odometry_2"
-                "ch9_back_end_1"
+                // "ch9_back_end_1"
+                "ch10_back_end_2"
             ],
             "presentation": {
                 "clear": true
