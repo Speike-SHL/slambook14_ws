@@ -40,11 +40,13 @@ int main()
     cv::Ptr<cv::DescriptorMatcher> matcher = cv::DescriptorMatcher::create("BruteForce-Hamming");
 
     //-- 第一步：检测Oriented FAST角点
+    // NOTE 11.3.2_DBow3_training_dictionary.cpp 介绍了一种同时提取关键点并计算描述子的方法，效率更高
     TicToc t_orb;
     detector->detect(img_1, keypoints_1);
     detector->detect(img_2, keypoints_2);
 
     //-- 第二步：根据角点计算Rotated BRIEF描述子
+    // NOTE 描述子为什么用cv::Mat储存见obsidian笔记
     descriptor->compute(img_1, keypoints_1, descriptors_1);
     descriptor->compute(img_2, keypoints_2, descriptors_2);
     cout << "提取ORB特征耗时：" << t_orb.toc() << "ms." << endl;

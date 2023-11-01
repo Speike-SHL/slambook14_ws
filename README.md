@@ -14,6 +14,11 @@ src下每章都是一个功能包
 ros2语法：
 - 创建功能包: `ros2 pkg create <package_name> --build-type ament_cmake --dependencies rclcpp std_msgs`
 
+cmake中查找某个包的办法：
+- `sudo updatedb`
+- `locate DBoW | grep cmake`
+
+
 ## 程序目录  
 1. ch3_rigid_body_trans(第三讲：三维空间刚体运动)
     - `ros2 run ch3_rigid_body_trans 3.6.1_useEigen`
@@ -48,3 +53,7 @@ ros2语法：
     - `ros2 run ch10_back_end_2 10.3.1_pose_graph_g2o_SE3` g2o进行位姿图优化，顶点和边类都使用g2o预置，所以不需要自定义顶点和边。最后使用`optimizer.save()`保存了图，可以用g2o_viewer打开，但是该函数好像只有g2o预先定义的顶点和边做优化时才能使用save，自定义的不能用。同时，预先定义的顶点和边使用了`read`和`write`函数，但是不管是跳转还是调试都找不到代码实现。
     - `ros2 run ch10_back_end_2 10.3.2_pose_graph_g2o_lie_algebra` 同样是g2o进行位姿图优化，但区别于上面程序，这里自定义了顶点和边，并且**首次实现了顶点类和边类的`read`和`write`函数**。
     > 后端可以用**SE-Sync**进行更快速的优化，比g2o快一个数量级，见论文《A Comparison of Graph Optimization Approaches for Pose Estimation in SLAM》
+9. ch11_loop_closure_detection
+    - `ros2 run ch11_loop_closure_detection 11.3.2_DBow3_training_dictionary` 使用DBow3从十张图像中创建小型字典, DBoW3库可以用C++14，不能用C++17.
+    - `ros2 run ch11_loop_closure_detection 11.4.2_DBoW3_similarity_calculation` 使用11.3.2生成的小字典进行相似度计算并检测回环是否发生，相似度计算可以图像与图像间对比，也可以进行数据库查询
+    > 除了DBoW3,还有FBoW、FAB-MAP库可用于回环。此外，基于描述子的词袋回环一定不是最好的方式。后续可以看看还有哪些方式可进行回环。
